@@ -1,7 +1,7 @@
 {
   "name": "gbf-raidfinder",
   "description": "A TweetDeck-like site for streaming Granblue raid tweets",
-  "repository": "https://github.com/walfie/gbf-raidfinder",
+  "repository": "https://github.com/leTokki/gbf-raidfinder",
   "logo": "https://cdn.rawgit.com/walfie/gbf-raidfinder/master/client/src/main/resources/public/icons/android-chrome-192x192.png",
   "keywords": ["gbf", "granblue", "granblue fantasy"],
   "env": {
