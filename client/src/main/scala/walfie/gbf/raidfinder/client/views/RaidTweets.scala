@@ -200,6 +200,7 @@ object RaidTweets {
       { menuItem("Move Right", "keyboard_arrow_right", _ => client.move(bossName, 1)).bind }
       { menuItem("Clear", "clear_all", _ => client.clear(bossName)).bind }
       { menuItem("Unfollow", "delete", _ => client.unfollow(bossName)).bind }
+      { menuItem("Auto Copy", "delete", _ => client.autoCopy()).bind }
       {
         val (text, icon) =
           if (isSubscribed.bind) ("Unsubscribe", "notifications_off")

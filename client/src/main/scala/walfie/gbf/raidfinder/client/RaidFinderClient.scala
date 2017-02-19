@@ -37,6 +37,8 @@ trait RaidFinderClient {
 
   def truncateColumns(maxColumnSize: Int): Unit
 
+  def autoCopy(): Unit
+
   def getNotificationSound(bossName: BossName): Option[NotificationSound]
   def setNotificationSound(
     bossName:            BossName,
@@ -53,6 +55,7 @@ class WebSocketRaidFinderClient(
 
   var isConnected: Var[Boolean] = Var(false)
   private var isStartingUp = true
+  var autoCopyStatus: Var[Boolean] = Var(false)
 
   private var allBossesMap: Map[BossName, RaidBossColumn] = Map.empty
 
@@ -154,9 +157,15 @@ class WebSocketRaidFinderClient(
     }
   }
 
+  private def setAutoCopy(changeState: Boolean => Boolean): Unit = {
+    autoCopyStatus := changeState(autoCopyStatus.get)
+  }
+
   def subscribe(bossName: BossName): Unit = setSubscription(bossName, _ => true)
   def unsubscribe(bossName: BossName): Unit = setSubscription(bossName, _ => false)
   def toggleSubscribe(bossName: BossName): Unit = setSubscription(bossName, !_)
+
+  def autoCopy(): Unit = { setAutoCopy(!_) }
 
   def clear(bossName: BossName): Unit = {
     allBossesMap.get(bossName).foreach(_.clear())
@@ -286,6 +295,8 @@ class WebSocketRaidFinderClient(
       HtmlHelpers.copy(tweet.raidId)
       ()
     }
+
+    if (autoCopyStatus.get == true) { HtmlHelpers.copy(tweet.raidId) }
 
     HtmlHelpers.desktopNotification(
       title = tweet.bossName,
