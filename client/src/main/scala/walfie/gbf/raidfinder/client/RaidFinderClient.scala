@@ -297,8 +297,7 @@ class WebSocketRaidFinderClient(
       ()
     }
 
-    if (autoCopyStatus.get == true) { event: dom.Event =>
-      event.preventDefault()
+    if (autoCopyStatus.get == true) {
       HtmlHelpers.copy(tweet.raidId)
       ()
     }
