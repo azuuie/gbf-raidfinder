@@ -5,6 +5,7 @@ import com.thoughtworks.binding.Binding._
 import java.util.Date
 import org.scalajs.dom
 import org.scalajs.dom.raw.Storage
+import org.scalajs.dom.raw.ClipboardEvent
 import scala.scalajs.js
 import walfie.gbf.raidfinder.BuildInfo
 import walfie.gbf.raidfinder.client.audio._
@@ -296,7 +297,10 @@ class WebSocketRaidFinderClient(
       ()
     }
 
-    if (autoCopyStatus.get == true) { HtmlHelpers.copy(tweet.raidId) }
+    if (autoCopyStatus.get == true) { event: dom.Event =>
+      event.preventDefault()
+      HtmlHelpers.copy(tweet.raidId)
+    }
 
     HtmlHelpers.desktopNotification(
       title = tweet.bossName,
