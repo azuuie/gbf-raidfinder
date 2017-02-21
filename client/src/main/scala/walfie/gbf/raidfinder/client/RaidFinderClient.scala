@@ -291,14 +291,17 @@ class WebSocketRaidFinderClient(
       "\n(Click to copy raid ID)"
     ).filter(_.nonEmpty).mkString("\n")
 
+    if (autoCopyStatus.get == true) {
+      println("Hello, world")
+      event: dom.Event =>
+        HtmlHelpers.copy(tweet.raidId)
+        ()
+    }
+
     val onClick = { event: dom.Event =>
       event.preventDefault()
       HtmlHelpers.copy(tweet.raidId)
       ()
-    }
-
-    if (autoCopyStatus.get == true) {
-      HtmlHelpers.AutoCopy(onClick = onClick)
     }
 
     HtmlHelpers.desktopNotification(

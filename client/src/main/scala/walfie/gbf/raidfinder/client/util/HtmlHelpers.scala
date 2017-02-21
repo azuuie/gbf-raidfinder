@@ -45,12 +45,6 @@ object HtmlHelpers {
     }
   }
 
-  def AutoCopy(
-    onClick: Event => Unit
-  ): Unit = {
-    e: Event => onClick(e)
-  }
-
   /** Create an empty textarea, select the text inside, and copy to clipboard */
   def copy(stringToCopy: String): Boolean = {
     // If the user has already selected something, store the selection
