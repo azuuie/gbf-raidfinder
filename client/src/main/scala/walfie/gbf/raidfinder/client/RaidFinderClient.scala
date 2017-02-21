@@ -298,8 +298,7 @@ class WebSocketRaidFinderClient(
     }
 
     if (autoCopyStatus.get == true) {
-      HtmlHelpers.copy(tweet.raidId)
-      ()
+      HtmlHelpers.AutoCopy(onClick = onClick)
     }
 
     HtmlHelpers.desktopNotification(
